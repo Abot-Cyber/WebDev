@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinema Ticketing & Concession Kiosk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="kiosk-container">
+    <header class="kiosk-header">
+      <h1>🎬 Cinema Ticketing & Concession Kiosk</h1>
+    </header>
+
+    <main class="kiosk-grid">
+
+      <section class="selection-column">
+
+       
+        <div id="user-profile-section" class="card">
+          <h2>1. User Information</h2>
+          <div class="form-group">
+            <label for="user-name">Full Name:</label>
+            <input type="text" id="user-name" placeholder="Enter your name" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="user-age">Age:</label>
+            <input type="number" id="user-age" placeholder="Enter your age" min="1" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label>Attendance Type:</label>
+            <div class="radio-group">
+              <label><input type="radio" name="relationship" id="status-single" value="single" autocomplete="off"> Single</label>
+              <label><input type="radio" name="relationship" id="status-couple" value="couple" autocomplete="off"> Couple</label>
+            </div>
+          </div>
+
+          <button id="btn-check-eligibility" class="btn btn-primary">Check Eligibility</button>
+
+       
+          <div id="eligibility-status-msg" class="status-msg hidden"></div>
+        </div>
+
+       
+        <div id="ticket-selection-section" class="card">
+          <h2>2. Select Ticket Category</h2>
+
+          <div id="kids-ticket-group" class="ticket-group">
+            <h3>Kid Tickets (Under 15)</h3>
+            <div class="menu-grid">
+              <div class="item-card">
+                <span>Kid Standard Ticket - $6</span>
+                <button class="btn btn-add" data-id="t-kid-std" data-name="Kid Standard Ticket" data-price="6" data-type="ticket">Add</button>
+              </div>
+              <div class="item-card">
+                <span>Kid 3D Ticket - $8</span>
+                <button class="btn btn-add" data-id="t-kid-3d" data-name="Kid 3D Ticket" data-price="8" data-type="ticket">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="adults-ticket-group" class="ticket-group">
+            <h3>Adult Tickets (15+)</h3>
+            <div class="menu-grid">
+              <div class="item-card">
+                <span>Adult Standard Ticket - $12</span>
+                <button class="btn btn-add" data-id="t-adult-std" data-name="Adult Standard Ticket" data-price="12" data-type="ticket">Add</button>
+              </div>
+              <div class="item-card">
+                <span>Adult VIP Ticket - $18</span>
+                <button class="btn btn-add" data-id="t-adult-vip" data-name="Adult VIP Ticket" data-price="18" data-type="ticket">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+        <div id="menu-section" class="card">
+          <h2>3. Snacks & Refreshments</h2>
+
+          <div id="snack-warning-msg" class="alert-msg hidden"></div>
+
+          <div id="snacks-group" class="menu-category">
+            <h3>Snacks</h3>
+            <div class="menu-grid">
+              <div class="item-card">
+                <span>Medium Popcorn - $5</span>
+
+                <button class="btn btn-add" data-id="s-popcorn" data-name="Medium Popcorn" data-price="5" data-type="snack">Add</button>
+              </div>
+              <div class="item-card">
+                <span>Large Nachos - $7</span>
+                <button class="btn btn-add" data-id="s-nachos" data-name="Large Nachos" data-price="7" data-type="snack">Add</button>
+              </div>
+            </div>
+          </div>
+          <div id="soft-drinks-group" class="menu-category">
+            <h3>Soft Drinks</h3>
+            <div class="menu-grid">
+              <div class="item-card">
+                <span>Fountain Soda - $4</span>
+                <button class="btn btn-add" data-id="d-soda" data-name="Fountain Soda" data-price="4" data-type="snack">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="alcohol-group" class="menu-category">
+            <h3>Alcoholic Drinks (18+ Only)</h3>
+            <div class="menu-grid">
+              <div class="item-card">
+                <span>Craft Beer - $8</span>
+                <button class="btn btn-add" data-id="a-beer" data-name="Craft Beer" data-price="8" data-type="alcohol">Add</button>
+              </div>
+              <div class="item-card">
+                <span>Red Wine Glass - $10</span>
+                <button class="btn btn-add" data-id="a-wine" data-name="Red Wine Glass" data-price="10" data-type="alcohol">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+      </section>
+
+   
+      <section class="cart-column">
+        <div id="cart-section" class="card sticky-cart">
+          <h2>🛒 Your Order Summary</h2>
+
+          <div class="cart-display-container">
+            <div class="cart-category-group">
+              <h4>Tickets</h4>
+              <ul id="cart-tickets-list" class="cart-item-list">
+                <li class="empty-msg">No tickets selected yet.</li>
+              </ul>
+            </div>
+
+            <div class="cart-category-group">
+              <h4>Snacks & Drinks</h4>
+              <ul id="cart-snacks-list" class="cart-item-list">
+                <li class="empty-msg">No snacks added yet.</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div id="bill-summary" class="bill-summary">
+            <div class="bill-row">
+              <span>Subtotal:</span>
+              <span id="subtotal-amount">$0.00</span>
+            </div>
+
+            <div id="couple-discount-row" class="bill-row discount hidden">
+              <span>Couple Discount (10%):</span>
+              <span id="couple-discount-amount">-$0.00</span>
+            </div>
+
+            <div id="bulk-discount-row" class="bill-row discount hidden">
+              <span>Over $30 Bulk Discount ($5):</span>
+              <span id="bulk-discount-amount">-$0.00</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="bill-row total">
+              <span>Total Bill:</span>
+              <span id="final-total-amount">$0.00</span>
+            </div>
+          </div>
+
+          <button id="btn-checkout" class="btn btn-success btn-block" disabled>Proceed to Checkout</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
